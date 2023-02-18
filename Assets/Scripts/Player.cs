@@ -9,7 +9,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [SerializeField] private float _speed = 3f;
-    [SerializeField] private float _jumpForce = 450f;
+    [SerializeField] private float _jumpForce = 8f;
 
     private Animator _animator;
     private Rigidbody2D _rigidbody;
