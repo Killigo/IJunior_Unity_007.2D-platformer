@@ -6,7 +6,7 @@ public class GemSpawner : MonoBehaviour
 
     private Transform[] _points;
 
-    void Start()
+    private void Start()
     {
         _points = GetComponentsInChildren<Transform>();
 

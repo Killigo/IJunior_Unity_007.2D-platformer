@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    private const string Horizontal = "Horizontal";
+
     [SerializeField] private float _speed = 3f;
     [SerializeField] private float _jumpForce = 5f;
 
@@ -13,8 +15,9 @@ public class Player : MonoBehaviour
     private SpriteRenderer _spriteRenderer;
 
     private int _stateHash = Animator.StringToHash("State");
-    private const string _horizontal = "Horizontal";
     private bool _isGrounded;
+    private float _directionZero = 0.0f;
+    private float _radius = 0.3f;
 
     private void Start()
     {
@@ -35,7 +38,7 @@ public class Player : MonoBehaviour
         if (!_isGrounded)
             _animator.SetInteger(_stateHash, 2);
 
-        if (Input.GetButton(_horizontal))
+        if (Input.GetButton(Horizontal))
             Run();
 
         if (_isGrounded && Input.GetKeyDown(KeyCode.Space))
@@ -47,9 +50,9 @@ public class Player : MonoBehaviour
         if (_isGrounded)
             _animator.SetInteger(_stateHash, 1);
 
-        Vector3 direction = transform.right * Input.GetAxis(_horizontal);
+        Vector3 direction = transform.right * Input.GetAxis(Horizontal);
         transform.position = Vector3.MoveTowards(transform.position, transform.position + direction, _speed * Time.deltaTime);
-        _spriteRenderer.flipX = direction.x < 0.0f;
+        _spriteRenderer.flipX = direction.x < _directionZero;
     }
 
     private void Jump()
@@ -60,7 +63,7 @@ public class Player : MonoBehaviour
 
     private void CheckGround()
     {
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 0.3f);
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, _radius);
         _isGrounded = colliders.Length > 1;
     }
 }
