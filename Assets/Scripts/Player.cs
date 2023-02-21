@@ -28,7 +28,7 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
-        CheckGround();
+        InspectionGround();
     }
 
     private void Update()
@@ -61,7 +61,7 @@ public class Player : MonoBehaviour
         _rigidbody.AddForce(transform.up * _jumpForce, ForceMode2D.Impulse);
     }
 
-    private void CheckGround()
+    private void InspectionGround()
     {
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, _radius);
         _isGrounded = colliders.Length > 1;

@@ -1,5 +1,7 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Animator))]
+
 public class Gem : MonoBehaviour
 {
     private Animator _animator;

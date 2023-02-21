@@ -26,10 +26,7 @@ public class EnemyPathMovement : MonoBehaviour
 
         transform.position = Vector3.MoveTowards(transform.position, target.position, _speed * Time.deltaTime);
 
-        if (target.position.x < transform.position.x)
-            _spriteRenderer.flipX = true;
-        else
-            _spriteRenderer.flipX = false;
+        _spriteRenderer.flipX = target.position.x < transform.position.x;
 
         if (transform.position == target.position)
         {
